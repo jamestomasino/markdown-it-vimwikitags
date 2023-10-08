@@ -1,37 +1,26 @@
-'use strict';
-var isSpace = require('markdown-it/lib/common/utils').isSpace
-
-module.exports = function hashtag_plugin(md, options) {
-	options = options || {};
-	const HASHTAG_RE = options.HASHTAG_RE || /(^#[a-z]+[a-z0-9/\-]*)[\s]?/i;
-	function hashtag(state, silent) {
+module.exports = function vimwikitag_plugin(md, options) {
+	options = options || {}
+	const VIMWIKITAG_RE = options.VIMWIKITAG_RE || /(:[a-z]+[a-z0-9/_\-]*):/gi
+	function vimwikitag(state, silent) {
 		var token,
 			pos = state.pos,
 			max = state.posMax,
-			matches;
-
-		if (state.src.charCodeAt(pos) !== 0x23 /* # */) return false;
-
-		if (pos !== 0 && !isSpace(state.src.charCodeAt(pos - 1))) return false;
-
-		// '#' at the end of the inline block
-		if (pos >= max) return false;
-
-		matches = state.src.slice(pos).match(HASHTAG_RE);
+			matches
+		matches = state.src.slice(pos).match(VIMWIKITAG_RE)
 		if (matches) {
-			state.pos += matches[0].length;
-			// pos =
+			state.pos += matches[0].length
 			if (!silent) {
-				token = state.push('hashtag_open', 'span', 1);
-				token.attrs = [['class', 'hashtag']];
-				token = state.push('text', '', 0);
-				token.content = matches[1];
-				token = state.push('hashtag_close', 'span', -1);
+				const tag = matches[0].substr(1, matches[0].length - 2)
+				token = state.push('vimwikitag_open', 'a', 1)
+				token.attrs = [['class', 'vimwikitag'],['href', `/search?q=${tag}`]]
+				token = state.push('text', '', 0)
+				token.content = tag
+				token = state.push('vimwikitag_close', 'a', -1)
 			}
-			return true;
+			return true
 		}
-		return false;
+		return false
 	}
 
-	md.inline.ruler.after('entity', 'hashtag', hashtag);
-};
+	md.inline.ruler.after('entity', 'vimwikitag', vimwikitag)
+}

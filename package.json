@@ -4,8 +4,7 @@
 	"description": "Plugin to vimwiki tags for markdown-it markdown parser",
 	"main": "index.js",
 	"scripts": {
-		"lint": "eslint .",
-		"test": "nyc mocha"
+		"lint": "eslint ."
 	},
 	"keywords": [
 		"markdown",
@@ -19,9 +18,6 @@
 	"repository": "https://github.com/jamestomasino/markdown-it-vimwikitags",
 	"homepage": "https://github.com/jamestomasino/markdown-it-vimwikitags",
 	"devDependencies": {
-		"markdown-it": "^13.0.1",
-		"markdown-it-testgen": "^0.1.6",
-		"mocha": "^10.2.0",
-		"nyc": "^15.1.0"
+		"markdown-it": "^13.0.1"
 	}
 }
