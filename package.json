@@ -1,6 +1,6 @@
 {
 	"name": "@jamestomasino/markdown-it-vimwikitags",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Plugin to vimwiki tags for markdown-it markdown parser",
 	"main": "index.js",
 	"scripts": {
