@@ -12,7 +12,7 @@ module.exports = function vimwikitag_plugin(md, options) {
 			if (!silent) {
 				const tag = matches[0].substr(1, matches[0].length - 2)
 				token = state.push('vimwikitag_open', 'a', 1)
-				token.attrs = [['class', 'vimwikitag'],['href', `/search?q=${tag}`]]
+				token.attrs = [['class', 'vimwikitag'],['href', `/search?q=:${tag}:`]]
 				token = state.push('text', '', 0)
 				token.content = tag
 				token = state.push('vimwikitag_close', 'a', -1)
